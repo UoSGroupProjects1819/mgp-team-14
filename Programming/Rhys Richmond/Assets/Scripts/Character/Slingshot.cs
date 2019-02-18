@@ -25,7 +25,7 @@ public class Slingshot : MonoBehaviour {
     private float delay;
     public float ResetSlingShotDelay;
 
-    private int CollectibleCounter;
+    public int CollectibleCounter;
 
     void Awake () {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
