@@ -7,6 +7,9 @@ TagManager:
   - Platform
   - PathRender
   - Collectible
+  - FinishPlatform
+  - EndScreen
+  - PlayerFalling
   layers:
   - Default
   - TransparentFX

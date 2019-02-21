@@ -15,9 +15,15 @@ public class Slingshot : MonoBehaviour {
 
     public GameObject ResetPoint;
     public GameObject LinkPoint;
+    public GameObject EndScreen;
     //public GameObject LRenderProjectile;
 
     public Text Countertext;
+    public Text SlingShotCounterText;
+
+    public Text EndScreenCounterText;
+    public Text EndScreenSlingShotText;
+
     private bool IsPressed;
     public bool CanBeLanched = true;
 
@@ -26,13 +32,16 @@ public class Slingshot : MonoBehaviour {
     public float ResetSlingShotDelay;
 
     public int CollectibleCounter;
+    private int SlingShotTimes;
+
+    public GameObject PlayerLaunchLocation;
 
     void Awake () {
+        //PlayerLaunchLocation = ResetPoint.transform;
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         sj = this.gameObject.GetComponent<SpringJoint2D>();
         LRender = this.gameObject.GetComponent<LineRenderer>();
-        //LRenderProjectile = GameObject.FindGameObjectWithTag("PathRender");
-        //ProjectileRender = LRenderProjectile.GetComponent<LineRenderer>();
+        
 
         SlingRb = sj.connectedBody;
         LRender.enabled = false;
@@ -43,6 +52,10 @@ public class Slingshot : MonoBehaviour {
     private void FixedUpdate()
     {
         CharacterDrag();
+        SlingShotCounterText.text = ("Jumps: " + SlingShotTimes);
+        EndScreenCounterText.text = ("Coins Collected : " + CollectibleCounter);
+        EndScreenSlingShotText.text = ("Number of times Slingshot : " + SlingShotTimes);
+        //PlayerLaunchLocation.transform.position = this.gameObject.transform.position;
     }
 
     private void OnMouseDown()
@@ -56,6 +69,7 @@ public class Slingshot : MonoBehaviour {
     {
         IsPressed = false;
         rb.isKinematic = false;
+        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         CanBeLanched = false;
         LRender.enabled = false;
         StartCoroutine(Release());
@@ -66,6 +80,7 @@ public class Slingshot : MonoBehaviour {
             if (CanBeLanched == true) {
                 LRender.enabled = true;
                 SetLRenderPos();
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 float CurrentDist = Vector2.Distance(MousePos, SlingRb.position);
                 if (CurrentDist > MaxDist)
@@ -81,17 +96,23 @@ public class Slingshot : MonoBehaviour {
     }
     private IEnumerator Release() {
         yield return new WaitForSeconds(delay);
+        SlingShotTimes += 1;
+        PlayerLaunchLocation.transform.position = this.gameObject.transform.position;
         sj.enabled = false;
 
     }
 
     private IEnumerator BackToSlingShot() {
         yield return new WaitForSeconds(ResetSlingShotDelay);
-        LinkPoint.transform.position = ResetPoint.transform.position;
         rb.isKinematic = true;
         sj.enabled = true;
         CanBeLanched = true;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        this.gameObject.transform.position = LinkPoint.transform.position;
+        LinkPoint.transform.position = ResetPoint.transform.position;
         rb.isKinematic = false;
+       
+
 
     }
 
@@ -103,6 +124,7 @@ public class Slingshot : MonoBehaviour {
     }
 
     //Pure testing to allow to see the projectile path when testing.
+    // This has already been cut as it wasn't drawing correctly.
     private void SettingProjectilePos()
     {
         Vector3[] Positions = new Vector3[2];
@@ -113,16 +135,28 @@ public class Slingshot : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Platform") {
+        if (collision.tag == "Platform")
+        {
 
             LinkPoint.transform.position = ResetPoint.transform.position;
             collision.GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(BackToSlingShot());
-        } else if (collision.tag == "Collectible")
+        }
+        else if (collision.tag == "Collectible")
         {
             CollectibleCounter += 1;
             collision.gameObject.SetActive(false);
             Countertext.text = ("Coins:" + CollectibleCounter);
+        }
+        else if (collision.tag == "FinishPlatform")
+        {
+            EndScreen.SetActive(true);
+        }
+        else if (collision.tag == "PlayerFalling")
+        {
+            Debug.Log("Does something");
+            this.gameObject.transform.position = PlayerLaunchLocation.transform.position;
+            StartCoroutine(BackToSlingShot());
         }
     }
 
