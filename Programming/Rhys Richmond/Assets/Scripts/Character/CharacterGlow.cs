@@ -6,6 +6,7 @@ public class CharacterGlow : MonoBehaviour {
 
     private Light GlowCharacter;
     private Color GlowColour;
+    //private Color StartingGlow = new Color32(252, 91, 83, 255);
     private GameObject Character;
 	
 	void Start () {
@@ -17,7 +18,7 @@ public class CharacterGlow : MonoBehaviour {
     void Update() {
         GlowCharacter.color = GlowColour;
         if (Character.GetComponent<Slingshot>().CollectibleCounter == 1) {
-            GlowColour = Color.white;
+            GlowColour = Color.magenta;
         }
     }
 	
