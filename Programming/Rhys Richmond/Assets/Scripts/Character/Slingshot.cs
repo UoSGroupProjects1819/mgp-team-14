@@ -16,6 +16,10 @@ public class Slingshot : MonoBehaviour {
     public GameObject ResetPoint;
     public GameObject LinkPoint;
     public GameObject EndScreen;
+    private GameObject CoinCollectObject;
+    private GameObject JumpCollectObject;
+    private GameObject JumpedCollectObject;
+    private GameObject CoinCollectedObject;
     //public GameObject LRenderProjectile;
 
     public Text Countertext;
@@ -41,7 +45,21 @@ public class Slingshot : MonoBehaviour {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         sj = this.gameObject.GetComponent<SpringJoint2D>();
         LRender = this.gameObject.GetComponent<LineRenderer>();
+
+        CoinCollectObject = GameObject.Find("CollectibleText");
+        JumpCollectObject = GameObject.Find("SlingshotCounter");
+        JumpedCollectObject = GameObject.Find("JumpedText");
+        CoinCollectedObject = GameObject.Find("CoinsCollected");
+        EndScreen = GameObject.Find("LevelCompleteCanvas");
         
+        Countertext = CoinCollectObject.GetComponent<Text>();
+        SlingShotCounterText = JumpCollectObject.GetComponent<Text>();
+        EndScreenCounterText = CoinCollectedObject.GetComponent<Text>();
+        EndScreenSlingShotText = JumpedCollectObject.GetComponent<Text>();
+
+        EndScreen.SetActive(false);
+
+        PlayerLaunchLocation = GameObject.Find("PlayerReset");
 
         SlingRb = sj.connectedBody;
         LRender.enabled = false;
