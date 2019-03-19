@@ -16,6 +16,7 @@ public class Slingshot : MonoBehaviour {
     public GameObject ResetPoint;
     public GameObject LinkPoint;
     public GameObject EndScreen;
+
     private GameObject CoinCollectObject;
     private GameObject JumpCollectObject;
     private GameObject JumpedCollectObject;
@@ -30,6 +31,7 @@ public class Slingshot : MonoBehaviour {
 
     private bool IsPressed;
     public bool CanBeLanched = true;
+    public bool CanBeClicked = true;
 
     private float MaxDist = 2f;
     private float delay;
@@ -57,6 +59,7 @@ public class Slingshot : MonoBehaviour {
         EndScreenCounterText = CoinCollectedObject.GetComponent<Text>();
         EndScreenSlingShotText = JumpedCollectObject.GetComponent<Text>();
 
+
         EndScreen.SetActive(false);
 
         PlayerLaunchLocation = GameObject.Find("PlayerReset");
@@ -78,8 +81,12 @@ public class Slingshot : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        IsPressed = true;
-        rb.isKinematic = true;
+        if (CanBeClicked == true)
+        {
+            IsPressed = true;
+            rb.isKinematic = true;
+            CanBeClicked = false;
+        }
         //LRender.enabled = true;
     }
 
@@ -117,6 +124,7 @@ public class Slingshot : MonoBehaviour {
         SlingShotTimes += 1;
         PlayerLaunchLocation.transform.position = this.gameObject.transform.position;
         sj.enabled = false;
+        
 
     }
 
@@ -129,7 +137,8 @@ public class Slingshot : MonoBehaviour {
         this.gameObject.transform.position = LinkPoint.transform.position;
         LinkPoint.transform.position = ResetPoint.transform.position;
         rb.isKinematic = false;
-       
+        CanBeClicked = true;
+
 
 
     }
@@ -176,6 +185,7 @@ public class Slingshot : MonoBehaviour {
             this.gameObject.transform.position = PlayerLaunchLocation.transform.position;
             StartCoroutine(BackToSlingShot());
         }
+       
     }
 
 

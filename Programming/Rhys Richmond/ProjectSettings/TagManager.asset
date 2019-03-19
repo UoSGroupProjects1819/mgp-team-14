@@ -10,6 +10,10 @@ TagManager:
   - FinishPlatform
   - EndScreen
   - PlayerFalling
+  - tutorials
+  - Tutorial1
+  - Tutorial3
+  - Tutorial2
   layers:
   - Default
   - TransparentFX

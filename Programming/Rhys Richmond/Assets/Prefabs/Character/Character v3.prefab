@@ -122,6 +122,7 @@ MonoBehaviour:
   EndScreenCounterText: {fileID: 0}
   EndScreenSlingShotText: {fileID: 0}
   CanBeLanched: 1
+  CanBeClicked: 1
   ResetSlingShotDelay: 1
   CollectibleCounter: 0
   PlayerLaunchLocation: {fileID: 0}
@@ -642,7 +643,7 @@ GameObject:
   - component: {fileID: 2461285424880125626}
   - component: {fileID: 718005144214316017}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
