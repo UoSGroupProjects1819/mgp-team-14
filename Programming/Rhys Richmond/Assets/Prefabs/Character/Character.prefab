@@ -19,8 +19,8 @@ GameObject:
   - component: {fileID: 108534214459906310}
   - component: {fileID: 6314450969559106746}
   m_Layer: 0
-  m_Name: Character v3
-  m_TagString: Untagged
+  m_Name: Character
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,7 +91,7 @@ SpringJoint2D:
   m_GameObject: {fileID: 1190415110760610}
   m_Enabled: 1
   serializedVersion: 4
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 50478472172470588}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -117,6 +117,7 @@ MonoBehaviour:
   ResetPoint: {fileID: 1418170631844718}
   LinkPoint: {fileID: 1671409229265782}
   EndScreen: {fileID: 0}
+  PreviousPlatform: {fileID: 0}
   Countertext: {fileID: 0}
   SlingShotCounterText: {fileID: 0}
   EndScreenCounterText: {fileID: 0}
@@ -178,7 +179,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -229,7 +230,7 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 10
     numCapVertices: 5
     alignment: 0
     textureMode: 0
@@ -693,7 +694,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -714,7 +715,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c0c282b05cd116244af8d18b1a96765c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.89411765}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -17,6 +17,8 @@ public class Slingshot : MonoBehaviour {
     public GameObject LinkPoint;
     public GameObject EndScreen;
 
+    public GameObject PreviousPlatform;
+
     private GameObject CoinCollectObject;
     private GameObject JumpCollectObject;
     private GameObject JumpedCollectObject;
@@ -38,7 +40,7 @@ public class Slingshot : MonoBehaviour {
     public float ResetSlingShotDelay;
 
     public int CollectibleCounter;
-    private int SlingShotTimes;
+    public int SlingShotTimes;
 
     public GameObject PlayerLaunchLocation;
 
@@ -53,7 +55,8 @@ public class Slingshot : MonoBehaviour {
         JumpedCollectObject = GameObject.Find("JumpedText");
         CoinCollectedObject = GameObject.Find("CoinsCollected");
         EndScreen = GameObject.Find("LevelCompleteCanvas");
-        
+        PreviousPlatform = GameObject.Find("StartingPlatform");
+
         Countertext = CoinCollectObject.GetComponent<Text>();
         SlingShotCounterText = JumpCollectObject.GetComponent<Text>();
         EndScreenCounterText = CoinCollectedObject.GetComponent<Text>();
@@ -95,9 +98,14 @@ public class Slingshot : MonoBehaviour {
         IsPressed = false;
         rb.isKinematic = false;
         //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        CanBeLanched = false;
         LRender.enabled = false;
         StartCoroutine(Release());
+        if (CanBeClicked == false)
+        {
+            CanBeLanched = false;
+        }
+        sj.enabled = true;
+
     }
 
     void CharacterDrag() {
@@ -124,7 +132,8 @@ public class Slingshot : MonoBehaviour {
         SlingShotTimes += 1;
         PlayerLaunchLocation.transform.position = this.gameObject.transform.position;
         sj.enabled = false;
-        
+        PreviousPlatform.GetComponent<BoxCollider2D>().enabled = true;
+
 
     }
 
@@ -132,12 +141,12 @@ public class Slingshot : MonoBehaviour {
         yield return new WaitForSeconds(ResetSlingShotDelay);
         rb.isKinematic = true;
         sj.enabled = true;
-        CanBeLanched = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         this.gameObject.transform.position = LinkPoint.transform.position;
         LinkPoint.transform.position = ResetPoint.transform.position;
         rb.isKinematic = false;
         CanBeClicked = true;
+        CanBeLanched = true;
 
 
 
@@ -165,7 +174,9 @@ public class Slingshot : MonoBehaviour {
         if (collision.tag == "Platform")
         {
 
-            LinkPoint.transform.position = ResetPoint.transform.position;
+            LinkPoint.transform.position = collision.transform.GetChild(0).position;
+            //collision.transform.GetChild(0);
+            PreviousPlatform = collision.gameObject;
             collision.GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(BackToSlingShot());
         }
