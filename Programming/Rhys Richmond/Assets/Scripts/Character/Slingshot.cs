@@ -77,8 +77,8 @@ public class Slingshot : MonoBehaviour {
     {
         CharacterDrag();
         SlingShotCounterText.text = ("Jumps: " + SlingShotTimes);
-        EndScreenCounterText.text = ("Coins Collected : " + CollectibleCounter);
-        EndScreenSlingShotText.text = ("Number of times Slingshot : " + SlingShotTimes);
+        EndScreenCounterText.text = ("" + CollectibleCounter);
+        EndScreenSlingShotText.text = ("" + SlingShotTimes);
         //PlayerLaunchLocation.transform.position = this.gameObject.transform.position;
     }
 

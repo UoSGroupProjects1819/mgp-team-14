@@ -126,6 +126,7 @@ MonoBehaviour:
   CanBeClicked: 1
   ResetSlingShotDelay: 1
   CollectibleCounter: 0
+  SlingShotTimes: 0
   PlayerLaunchLocation: {fileID: 0}
 --- !u!114 &114798845260313732
 MonoBehaviour:
@@ -140,9 +141,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sprites:
-  - {fileID: 21300000, guid: 5d67f17e6c18cc045bc8756da7cacf63, type: 3}
-  - {fileID: 21300000, guid: 310b0b4f0b85ff048841b62e4fe00a71, type: 3}
-  - {fileID: 21300000, guid: 96ca728161c69a2479294d1136aa934f, type: 3}
+  - {fileID: 21300000, guid: 1f339b6e97ff3af4eb42263d80fd4f87, type: 3}
+  - {fileID: 21300000, guid: 561839f38829ac74d9c75bd36a70fe5b, type: 3}
+  - {fileID: 21300000, guid: ac01ec5775b616449bdfc3dfaceed076, type: 3}
 --- !u!120 &120540886186438982
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -578,7 +579,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7052551378173962295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: -0.243, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4733110667587580}
@@ -621,7 +622,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 5d67f17e6c18cc045bc8756da7cacf63, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f339b6e97ff3af4eb42263d80fd4f87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

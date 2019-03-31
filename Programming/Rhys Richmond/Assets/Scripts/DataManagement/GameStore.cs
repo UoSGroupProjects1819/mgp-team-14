@@ -9,8 +9,10 @@ public class GameStore : MonoBehaviour
     public static GameStore Storage;
     public int TotalStars;
     public int Level1Stars;
-
-
+    public int Level2Stars;
+    public int Level3Stars;
+    public int Level4Stars;
+    public int Level5Stars;
     void Awake()
     {
         
@@ -27,7 +29,7 @@ public class GameStore : MonoBehaviour
 
     void Update()
     {
-        TotalStars = Level1Stars;
+        TotalStars = Level1Stars + Level2Stars + Level3Stars + Level4Stars + Level5Stars;
     }
 
     public void Save()
@@ -38,6 +40,10 @@ public class GameStore : MonoBehaviour
         PlayerData data = new PlayerData();
         data.Stars = TotalStars;
         data.StarsOne = Level1Stars;
+        data.StarsTwo = Level2Stars;
+        data.StarsThree = Level3Stars;
+        data.StarsFour = Level4Stars;
+        data.StarsFive = Level5Stars;
 
         bf.Serialize(Savefile, data);
         Savefile.Close();
@@ -54,6 +60,10 @@ public class GameStore : MonoBehaviour
 
             TotalStars = data.Stars;
             Level1Stars = data.StarsOne;
+            Level2Stars = data.StarsTwo;
+            Level2Stars = data.StarsThree;
+            Level4Stars = data.StarsFour;
+            Level5Stars = data.StarsFive;
         }
     }
 }
@@ -62,4 +72,8 @@ class PlayerData
 {
     public int Stars;
     public int StarsOne;
+    public int StarsTwo;
+    public int StarsThree;
+    public int StarsFour;
+    public int StarsFive;
 }
