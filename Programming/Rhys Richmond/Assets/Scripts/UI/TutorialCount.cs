@@ -15,7 +15,7 @@ public class TutorialCount : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("Happens");
+            //Debug.Log("Happens");
             TutorialOveriew.GetComponent<Tutorial>().TutorialCount += 1;
 
         }

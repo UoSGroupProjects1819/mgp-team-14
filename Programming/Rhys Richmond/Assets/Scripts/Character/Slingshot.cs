@@ -34,6 +34,7 @@ public class Slingshot : MonoBehaviour {
     private bool IsPressed;
     public bool CanBeLanched = true;
     public bool CanBeClicked = true;
+    public bool CanBeLaunched = true;
 
     private float MaxDist = 2f;
     private float delay;
@@ -89,22 +90,28 @@ public class Slingshot : MonoBehaviour {
             IsPressed = true;
             rb.isKinematic = true;
             CanBeClicked = false;
+            CanBeLaunched = true;
         }
         //LRender.enabled = true;
     }
 
     private void OnMouseUp()
     {
-        IsPressed = false;
-        rb.isKinematic = false;
-        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        LRender.enabled = false;
-        StartCoroutine(Release());
-        if (CanBeClicked == false)
+        if (CanBeLaunched)
         {
-            CanBeLanched = false;
+            IsPressed = false;
+            rb.isKinematic = false;
+            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            LRender.enabled = false;
+            StartCoroutine(Release());
+            if (CanBeClicked == false)
+            {
+                CanBeLanched = false;
+            }
+            sj.enabled = true;
+            CanBeLaunched = false;
         }
-        sj.enabled = true;
+        
 
     }
 
@@ -147,6 +154,7 @@ public class Slingshot : MonoBehaviour {
         rb.isKinematic = false;
         CanBeClicked = true;
         CanBeLanched = true;
+        CanBeLaunched = true;
 
 
 

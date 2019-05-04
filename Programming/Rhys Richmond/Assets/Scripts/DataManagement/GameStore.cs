@@ -13,6 +13,7 @@ public class GameStore : MonoBehaviour
     public int Level3Stars;
     public int Level4Stars;
     public int Level5Stars;
+    public bool BackToMenu = false;
     void Awake()
     {
         

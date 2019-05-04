@@ -15,17 +15,20 @@ public class MainMenu : MonoBehaviour
     public Text Level5StarsText;
     public GameObject Level5StarsTextgo;
 
-    public int Level1Stars;
-    public int Level2Stars;
-    public int Level3Stars;
-    public int Level4Stars;
-    public int Level5Stars;
+    private int Level1Stars;
+    private int Level2Stars;
+    private int Level3Stars;
+    private int Level4Stars;
+    private int Level5Stars;
+
+    public bool BackToMenu = false;
 
     public GameObject Level2Stop;
     public GameObject Level3Stop;
     public GameObject Level4Stop;
     public GameObject Level5Stop;
-   
+
+    public GameObject LevelPanel;
 
     public void Awake()
     {
@@ -34,16 +37,13 @@ public class MainMenu : MonoBehaviour
         Level3Stars = GameObject.Find("GlobalVariableStore").GetComponent<GameStore>().Level3Stars;
         Level4Stars = GameObject.Find("GlobalVariableStore").GetComponent<GameStore>().Level4Stars;
         Level5Stars = GameObject.Find("GlobalVariableStore").GetComponent<GameStore>().Level5Stars;
+        BackToMenu = GameObject.Find("GlobalVariableStore").GetComponent<GameStore>().BackToMenu;
         Level1StarsText.text = "Stars : " + Level1Stars;
         Level2StarsText.text = "Stars : " + Level2Stars;
         Level3StarsText.text = "Stars : " + Level3Stars;
         Level4StarsText.text = "Stars : " + Level4Stars;
         Level5StarsText.text = "Stars : " + Level5Stars;
 
-    }
-
-    public void Update()
-    {
         if (GameObject.Find("GlobalVariableStore").GetComponent<GameStore>().TotalStars >= 3)
         {
             Level2Stop.SetActive(false);
@@ -64,7 +64,16 @@ public class MainMenu : MonoBehaviour
             Level5Stop.SetActive(false);
             Level5StarsTextgo.SetActive(true);
         }
-        
+
+        if (BackToMenu == false)
+        {
+            LevelPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Stuff happens");
+            this.gameObject.SetActive(false);
+        }
     }
 
    public void Level1()
